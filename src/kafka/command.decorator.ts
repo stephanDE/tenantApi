@@ -2,9 +2,8 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import { RpcException } from '@nestjs/microservices';
-
-import { Command } from '../facility/commands/command';
-import { CreateFacilityCommand } from '../facility/commands/createFacility.command';
+import { Command } from 'src/tenant/commands/command';
+import { CreateFacilityCommand } from 'src/tenant/commands/createFacility.command';
 
 export const Cmd = createParamDecorator(
   async (data: unknown, ctx: ExecutionContext) => {

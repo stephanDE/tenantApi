@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Facility } from './facility.schema';
+import { CreateFacilityDto } from './dto/createFacility.dto';
 import { FloorEnrolledEvent } from './events/floorEnrolled.event';
 import { of } from 'rxjs';
 
@@ -36,6 +37,10 @@ export class FacilityService {
 
   async findOne(id: string): Promise<Facility> {
     return this.facilityModel.findById(id).exec();
+  }
+
+  async createOne(dto: CreateFacilityDto): Promise<Facility> {
+    return this.facilityModel.create(dto);
   }
 
   async enroll(event: FloorEnrolledEvent): Promise<Facility> {

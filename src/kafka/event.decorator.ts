@@ -7,12 +7,12 @@ import { FloorEnrolledEvent } from '../facility/events/floorEnrolled.event';
 import { Event } from '../facility/events/event';
 import { FlatEnrolledEvent } from 'src/facility/events/flatEnrolled.event';
 import { RoomEnrolledEvent } from 'src/facility/events/roomEnrolled.event';
+import { FacilityEnrolledEvent } from 'src/facility/events/facilityEnrolled.event';
 
 export const Evt = createParamDecorator(
   async (data: unknown, ctx: ExecutionContext): Promise<Event> => {
     const ctxData = ctx.switchToRpc().getData();
     const value = ctxData.value;
-
     if (
       !ctxData ||
       !ctxData.value ||
@@ -27,6 +27,9 @@ export const Evt = createParamDecorator(
     let event: Event;
 
     switch (value.action) {
+      case 'FacilityEnrolled':
+        event = plainToClass(FacilityEnrolledEvent, value);
+        break;
       case 'FloorEnrolled':
         event = plainToClass(FloorEnrolledEvent, value);
         break;

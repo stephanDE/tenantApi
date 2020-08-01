@@ -19,12 +19,15 @@ import { Cmd } from '../kafka/command.decorator';
 import { Roles } from '../auth/auth.decorator';
 import { RoleGuard } from '../auth/auth.guard';
 import { ExceptionFilter } from '../kafka/kafka.exception.filter';
+import { Command } from './commands/command';
 import { Event } from './events/event';
 import { Config } from '../config/config.interface';
+import { CommandHandler } from './commands/command.handler';
 import { EventHandler } from './events/event.handler';
 import { Evt } from '../kafka/event.decorator';
 import { Facility } from './facility.schema';
 import { FacilityService } from './facility.service';
+import { CreateFacilityDto } from './dto/createFacility.dto';
 
 @Controller('facility')
 @UseGuards(RoleGuard)
@@ -46,7 +49,7 @@ export class FacilityController {
     return this.facilityService.findOne(id);
   }
 
-  @KafkaTopic('facility-event') async onFacilityEvent(
+  @KafkaTopic('facility-event') async onStudentEvent(
     @Evt() event: Event,
   ): Promise<void> {
     await this.eventHandler.handleEvent(event);

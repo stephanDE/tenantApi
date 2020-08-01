@@ -1,4 +1,9 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+} from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -34,7 +39,7 @@ import { AuthModule } from './auth/auth.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    /*consumer.apply(AuthMiddleware).forRoutes(
+    consumer.apply(AuthMiddleware).forRoutes(
       {
         path: '/facility',
         method: RequestMethod.ALL,
@@ -51,6 +56,6 @@ export class AppModule implements NestModule {
         path: '/floor',
         method: RequestMethod.ALL,
       },
-    );*/
+    );
   }
 }
