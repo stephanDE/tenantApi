@@ -17,6 +17,7 @@ import { EventHandler } from './events/event.handler';
     ]),
     LoggingModule,
   ],
+  exports: [FacilityService],
   controllers: [FacilityController],
   providers: [FacilityService, EventHandler],
 })

@@ -3,7 +3,7 @@ import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 import { RpcException } from '@nestjs/microservices';
 import { Command } from 'src/tenant/commands/command';
-import { CreateFacilityCommand } from 'src/tenant/commands/createFacility.command';
+import { CreateTenantCommand } from 'src/tenant/commands/createTenant.command';
 
 export const Cmd = createParamDecorator(
   async (data: unknown, ctx: ExecutionContext) => {
@@ -18,7 +18,7 @@ export const Cmd = createParamDecorator(
 
     switch (value.action) {
       case 'CreateFacility':
-        command = plainToClass(CreateFacilityCommand, value);
+        command = plainToClass(CreateTenantCommand, value);
         break;
       default:
         throw new RpcException('unknown command type');

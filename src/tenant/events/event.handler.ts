@@ -1,34 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { RpcException } from '@nestjs/microservices';
-import { FloorEnrolledEvent } from './floorEnrolled.event';
 
-import { FacilityService } from '../facility.service';
-import { Facility } from '../facility.schema';
+import { TenantService } from '../tenant.service';
+import { Tenant } from '../tenant.schema';
 import { Event } from './event';
-import { FlatEnrolledEvent } from './flatEnrolled.event';
-import { RoomEnrolledEvent } from './roomEnrolled.event';
-import { FacilityEnrolledEvent } from './facilityEnrolled.event';
+import { TenantMovedEvent } from './tenantMoved.event';
+import { FacilityService } from 'src/facility/facility.service';
+import { Facility } from 'src/facility/facility.schema';
 
 @Injectable()
 export class EventHandler {
   constructor(private facilityService: FacilityService) {}
 
   async handleEvent(event: Event): Promise<any> {
-    console.log('NEUES EVENT**************', event.action);
     switch (event.action) {
-      case 'FacilityEnrolled': {
-        return this.handleFacilityEnrolledEvent(event as FacilityEnrolledEvent);
-      }
-      case 'FloorEnrolled': {
-        return this.handleFloorEnrolledEvent(event as FloorEnrolledEvent);
-      }
-
-      case 'FlatEnrolled': {
-        return this.handleFlatEnrolledEvent(event as FlatEnrolledEvent);
-      }
-
-      case 'RoomEnrolled': {
-        return this.handleRoomEnrolledEvent(event as RoomEnrolledEvent);
+      case 'TenantMoved': {
+        return this.handleTenantMovedEvent(event as TenantMovedEvent);
       }
 
       default:
@@ -36,26 +23,9 @@ export class EventHandler {
     }
   }
 
-  private async handleFacilityEnrolledEvent(
-    event: FloorEnrolledEvent,
+  private async handleTenantMovedEvent(
+    event: TenantMovedEvent,
   ): Promise<Facility> {
-    return this.facilityService.enrollFacility(event);
-  }
-
-  private async handleFloorEnrolledEvent(
-    event: FloorEnrolledEvent,
-  ): Promise<Facility> {
-    return this.facilityService.enrollFloor(event);
-  }
-
-  private async handleFlatEnrolledEvent(
-    event: FloorEnrolledEvent,
-  ): Promise<Facility> {
-    return this.facilityService.enrollFlat(event);
-  }
-  private async handleRoomEnrolledEvent(
-    event: FloorEnrolledEvent,
-  ): Promise<Facility> {
-    return this.facilityService.enrollRoom(event);
+    return this.facilityService.tenantMoved(event);
   }
 }

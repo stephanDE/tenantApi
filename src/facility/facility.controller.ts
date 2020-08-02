@@ -41,12 +41,14 @@ export class FacilityController {
     return this.facilityService.findAll();
   }
 
-  @Get('/:id')
-  async getOne(@Param('id', new MongoPipe()) id: string) {
-    return this.facilityService.findOne(id);
+  @KafkaTopic('facility-event') async onFacilityEvent(
+    @Evt() event: Event,
+  ): Promise<void> {
+    await this.eventHandler.handleEvent(event);
+    return;
   }
 
-  @KafkaTopic('facility-event') async onFacilityEvent(
+  @KafkaTopic('tenant-event') async onTenantEvent(
     @Evt() event: Event,
   ): Promise<void> {
     await this.eventHandler.handleEvent(event);

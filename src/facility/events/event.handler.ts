@@ -6,15 +6,14 @@ import { FacilityService } from '../facility.service';
 import { Facility } from '../facility.schema';
 import { Event } from './event';
 import { FlatEnrolledEvent } from './flatEnrolled.event';
-import { RoomEnrolledEvent } from './roomEnrolled.event';
 import { FacilityEnrolledEvent } from './facilityEnrolled.event';
+import { TenantMovedEvent } from 'src/tenant/events/tenantMoved.event';
 
 @Injectable()
 export class EventHandler {
   constructor(private facilityService: FacilityService) {}
 
   async handleEvent(event: Event): Promise<any> {
-    console.log('NEUES EVENT**************', event.action);
     switch (event.action) {
       case 'FacilityEnrolled': {
         return this.handleFacilityEnrolledEvent(event as FacilityEnrolledEvent);
@@ -27,8 +26,8 @@ export class EventHandler {
         return this.handleFlatEnrolledEvent(event as FlatEnrolledEvent);
       }
 
-      case 'RoomEnrolled': {
-        return this.handleRoomEnrolledEvent(event as RoomEnrolledEvent);
+      case 'TenantMoved': {
+        return this.handleTenantMovedEvent(event as FlatEnrolledEvent);
       }
 
       default:
@@ -53,9 +52,10 @@ export class EventHandler {
   ): Promise<Facility> {
     return this.facilityService.enrollFlat(event);
   }
-  private async handleRoomEnrolledEvent(
-    event: FloorEnrolledEvent,
+
+  private async handleTenantMovedEvent(
+    event: TenantMovedEvent,
   ): Promise<Facility> {
-    return this.facilityService.enrollRoom(event);
+    return this.facilityService.tenantMoved(event);
   }
 }

@@ -10,7 +10,28 @@ export class Facility extends Document {
   facilityId: string;
 
   @Prop()
-  floors: string[];
+  floors: any[];
+}
+
+@Schema()
+export class Floor extends Document {
+  @Prop()
+  floorName: string;
+
+  @Prop()
+  facilityId: string;
+
+  @Prop()
+  floorId: string;
+
+  @Prop()
+  flats: any;
+}
+
+@Schema()
+export class Flat extends Document {
+  moveHistory: any[];
+  flatId: string;
 }
 
 export const FacilitySchema = SchemaFactory.createForClass(Facility);

@@ -13,6 +13,7 @@ import { ConfigService } from './config/config.service';
 import { AuthMiddleware } from './auth/auth.middleware';
 import { KafkaModule } from './kafka/kafka.module';
 import { AuthModule } from './auth/auth.module';
+import { TenantModule } from './tenant/tenant.module';
 
 @Module({
   imports: [
@@ -33,12 +34,14 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot(),
     FacilityModule,
     AuthModule,
+    TenantModule,
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    /*
     consumer.apply(AuthMiddleware).forRoutes(
       {
         path: '/facility',
@@ -56,6 +59,6 @@ export class AppModule implements NestModule {
         path: '/floor',
         method: RequestMethod.ALL,
       },
-    );
+    );*/
   }
 }
