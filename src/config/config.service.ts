@@ -21,8 +21,7 @@ export class ConfigService {
     auth.realm = process.env.AUTH_REALM || 'edu';
 
     auth.host = process.env.AUTH_HOST || 'localhost';
-    auth.clientSecret =
-      process.env.AUTH_CLIENT_SECRET || '7847ddd2-9707-46ed-bec5-75014c094a76';
+    auth.clientSecret = '7847ddd2-9707-46ed-bec5-75014c094a76';
 
     auth.resource = process.env.AUTH_RESOURCE || 'tenant-service';
     auth.publicKey =
