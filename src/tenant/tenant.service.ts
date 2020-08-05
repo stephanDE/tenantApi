@@ -22,6 +22,14 @@ export class TenantService {
   }
 
   async tenantMoved(event: any): Promise<Tenant> {
+    // kick old tenant out of flat
+    await this.tenantModel.findOneAndUpdate(
+      { flatId: event.flatId },
+      {
+        flatId: null,
+      },
+    );
+    // new tenant move in
     await this.tenantModel
       .findByIdAndUpdate(
         {
