@@ -53,8 +53,6 @@ export class FacilityService {
     );
   }
   async enrollFacility(event: FloorEnrolledEvent): Promise<Facility> {
-    console.log(event.data);
-
     return this.facilityModel.create({
       facilityId: event.data._id,
       address: event.data.address,

@@ -22,7 +22,7 @@ export class TenantService {
   }
 
   async tenantMoved(event: any): Promise<Tenant> {
-    return this.tenantModel
+    await this.tenantModel
       .findByIdAndUpdate(
         {
           _id: event.tenantId,
@@ -33,5 +33,7 @@ export class TenantService {
         },
       )
       .exec();
+
+    return this.tenantModel.findById(event.tenantId).exec();
   }
 }
