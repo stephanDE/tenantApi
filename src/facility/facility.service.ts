@@ -76,6 +76,9 @@ export class FacilityService {
       'floors.flats.flatId': tenant.flatId,
     });
 
+    console.log('suche haus', tenant.flatId);
+    console.log('habe gefunden', facility);
+
     map(facility.floors, (floor: Floor) => {
       map(floor.flats, (flat: Flat) => {
         if (flat.flatId === tenant.flatId) {
