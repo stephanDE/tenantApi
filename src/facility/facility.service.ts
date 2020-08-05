@@ -75,7 +75,7 @@ export class FacilityService {
     const facility = await this.facilityModel.findOne({
       'floors.flats.flatId': tenant.flatId,
     });
-
+    console.log('mieter', tenant);
     console.log('suche haus', tenant.flatId);
     console.log('habe gefunden', facility);
 
