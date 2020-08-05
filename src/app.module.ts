@@ -41,24 +41,15 @@ import { TenantModule } from './tenant/tenant.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    /*
     consumer.apply(AuthMiddleware).forRoutes(
       {
         path: '/facility',
         method: RequestMethod.ALL,
       },
       {
-        path: '/room',
+        path: '/tenant',
         method: RequestMethod.ALL,
       },
-      {
-        path: '/flat',
-        method: RequestMethod.ALL,
-      },
-      {
-        path: '/floor',
-        method: RequestMethod.ALL,
-      },
-    );*/
+    );
   }
 }
