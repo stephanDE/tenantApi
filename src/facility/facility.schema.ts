@@ -32,6 +32,36 @@ export class Floor extends Document {
 export class Flat extends Document {
   moveHistory: any[];
   flatId: string;
+
+  @Prop()
+  floorId: string;
+
+  @Prop()
+  facilityId: string;
+
+  @Prop()
+  flatName: string;
+
+  @Prop()
+  rooms: any[];
+}
+
+@Schema()
+export class Room extends Document {
+  @Prop()
+  floorId: string;
+
+  @Prop()
+  facilityId: string;
+
+  @Prop()
+  flatId: string;
+
+  @Prop()
+  roomId: String;
+
+  @Prop()
+  roomName: string;
 }
 
 export const FacilitySchema = SchemaFactory.createForClass(Facility);

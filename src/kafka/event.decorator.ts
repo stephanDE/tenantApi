@@ -8,6 +8,8 @@ import { Event } from '../facility/events/event';
 import { FlatEnrolledEvent } from 'src/facility/events/flatEnrolled.event';
 import { FacilityEnrolledEvent } from 'src/facility/events/facilityEnrolled.event';
 import { TenantMovedEvent } from 'src/tenant/events/tenantMoved.event';
+import { RoomEnrolledEvent } from 'src/facility/events/roomEnrolled.event';
+import { DeviceEvent } from 'src/device/events/event';
 
 export const Evt = createParamDecorator(
   async (data: unknown, ctx: ExecutionContext): Promise<Event> => {
@@ -35,6 +37,15 @@ export const Evt = createParamDecorator(
         break;
       case 'FlatEnrolled':
         event = plainToClass(FlatEnrolledEvent, value);
+        break;
+      case 'RoomEnrolled':
+        event = plainToClass(RoomEnrolledEvent, value);
+        break;
+      case 'FraunhoferDeviceCreated':
+        event = plainToClass(DeviceEvent, value);
+        break;
+      case 'FraunhoferDeviceUpdated':
+        event = plainToClass(DeviceEvent, value);
         break;
       case 'TenantMoved':
         event = plainToClass(TenantMovedEvent, value);

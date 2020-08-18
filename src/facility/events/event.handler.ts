@@ -3,11 +3,12 @@ import { RpcException } from '@nestjs/microservices';
 import { FloorEnrolledEvent } from './floorEnrolled.event';
 
 import { FacilityService } from '../facility.service';
-import { Facility } from '../facility.schema';
+import { Facility, Room } from '../facility.schema';
 import { Event } from './event';
 import { FlatEnrolledEvent } from './flatEnrolled.event';
 import { FacilityEnrolledEvent } from './facilityEnrolled.event';
 import { TenantMovedEvent } from 'src/tenant/events/tenantMoved.event';
+import { RoomEnrolledEvent } from './roomEnrolled.event';
 
 @Injectable()
 export class EventHandler {
@@ -26,6 +27,10 @@ export class EventHandler {
         return this.handleFlatEnrolledEvent(event as FlatEnrolledEvent);
       }
 
+      case 'RoomEnrolled': {
+        return this.handleRoomEnrolledEvent(event as RoomEnrolledEvent);
+      }
+
       case 'TenantMoved': {
         return this.handleTenantMovedEvent(event as FlatEnrolledEvent);
       }
@@ -39,6 +44,12 @@ export class EventHandler {
     event: FloorEnrolledEvent,
   ): Promise<Facility> {
     return this.facilityService.enrollFacility(event);
+  }
+
+  private async handleRoomEnrolledEvent(
+    event: RoomEnrolledEvent,
+  ): Promise<Facility> {
+    return this.facilityService.enrollRoom(event);
   }
 
   private async handleFloorEnrolledEvent(

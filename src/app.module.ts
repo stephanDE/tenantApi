@@ -14,6 +14,7 @@ import { AuthMiddleware } from './auth/auth.middleware';
 import { KafkaModule } from './kafka/kafka.module';
 import { AuthModule } from './auth/auth.module';
 import { TenantModule } from './tenant/tenant.module';
+import { DeviceModule } from './device/device.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { TenantModule } from './tenant/tenant.module';
     ConfigModule.forRoot(),
     FacilityModule,
     AuthModule,
+    DeviceModule,
     TenantModule,
   ],
   controllers: [],
@@ -48,6 +50,10 @@ export class AppModule implements NestModule {
       },
       {
         path: '/tenant',
+        method: RequestMethod.ALL,
+      },
+      {
+        path: '/device',
         method: RequestMethod.ALL,
       },
     );
