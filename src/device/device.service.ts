@@ -11,6 +11,7 @@ export class DeviceService {
   }
 
   async updateFraunhoferDevice(event): Promise<any> {
+    console.log('update fraunhofer', event.data);
     const { fraunhoferFlatId, fraunhoferRoomNr } = event.data;
     return await this.fraunhoferDeviceModel
       .updateOne(
